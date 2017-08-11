@@ -1,4 +1,4 @@
-package me.sirgregg.selfbot.cmdsystem.cmds.functional;
+package me.sirgregg.selfbot.cmdsystem.cmds.functional.eval;
 
 import me.sirgregg.selfbot.SelfBot;
 import me.sirgregg.selfbot.cmdsystem.Command;

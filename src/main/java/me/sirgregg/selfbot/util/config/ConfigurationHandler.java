@@ -25,6 +25,7 @@ public class ConfigurationHandler {
 			jsonObject.addProperty("githubOAuthToken", "replace-me-with-your-github-oauth2-token");
 			jsonObject.addProperty("bitlyOAuthToken", "replace-me-with-your-bitly-oauth-token");
 			jsonObject.addProperty("loggingEnabled", true);
+			jsonObject.addProperty("scriptFilePath", "C:\\SelfBot\\script.js");
 
 			Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Without pretty printing, it's all on one line
 			gson.toJson(jsonObject, writer);

@@ -1,7 +1,7 @@
 package me.sirgregg.selfbot.util.config;
 
 public class Configuration {
-	private String lead, discordToken, githubOAuthToken, bitlyOAuthToken, version;
+	private String lead, discordToken, githubOAuthToken, bitlyOAuthToken, version, scriptFilePath;
 	private boolean loggingEnabled;
 
 	public String getLead() {
@@ -22,6 +22,10 @@ public class Configuration {
 
 	public String getVersion() {
 		return version;
+	}
+
+	public String getScriptFilePath() {
+		return scriptFilePath;
 	}
 
 	public boolean isLoggingEnabled() {

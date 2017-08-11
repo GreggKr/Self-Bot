@@ -2,10 +2,11 @@ package me.sirgregg.selfbot.cmdsystem;
 
 import me.sirgregg.selfbot.SelfBot;
 import me.sirgregg.selfbot.cmdsystem.cmds.fun.*;
-import me.sirgregg.selfbot.cmdsystem.cmds.functional.EvalCommand;
+import me.sirgregg.selfbot.cmdsystem.cmds.functional.eval.EvalCommand;
 import me.sirgregg.selfbot.cmdsystem.cmds.functional.HelpCommand;
 import me.sirgregg.selfbot.cmdsystem.cmds.functional.LineCommand;
 import me.sirgregg.selfbot.cmdsystem.cmds.functional.UrbanDictionaryCommand;
+import me.sirgregg.selfbot.cmdsystem.cmds.functional.eval.EvalFileCommand;
 import me.sirgregg.selfbot.cmdsystem.cmds.functional.github.RepoCommand;
 import me.sirgregg.selfbot.cmdsystem.cmds.functional.github.RepoListCommand;
 import me.sirgregg.selfbot.cmdsystem.cmds.functional.info.BotInfoCommand;
@@ -42,6 +43,7 @@ public class CommandHandler extends ListenerAdapter {
 		addCommand(new BotInfoCommand());
 		addCommand(new UserInfoCommand());
 		addCommand(new UrbanDictionaryCommand());
+		addCommand(new EvalFileCommand());
 	}
 
 	// Returns a list of commands that you can't change.

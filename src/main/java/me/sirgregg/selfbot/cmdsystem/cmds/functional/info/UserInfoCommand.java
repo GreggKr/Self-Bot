@@ -48,23 +48,28 @@ public class UserInfoCommand extends Command {
 		User mentionedUser = mentionedUsers.get(0);
 
 		try {
-			String reqUrl = "https://api-ssl.bitly.com/v3/shorten?access_token=" + key + "&longUrl=" + URLEncoder.encode(e.getGuild().getIconUrl(), "UTF-8");
-			URLConnection urlConnection = new URL(reqUrl).openConnection();
-			urlConnection.connect();
+			String returnValue;
+			if (mentionedUser.getEffectiveAvatarUrl()  == null) {
+				returnValue = "None.";
+			} else {
+				String reqUrl = "https://api-ssl.bitly.com/v3/shorten?access_token=" + key + "&longUrl=" + URLEncoder.encode(mentionedUser.getEffectiveAvatarUrl(), "UTF-8");
+				URLConnection urlConnection = new URL(reqUrl).openConnection();
+				urlConnection.connect();
 
-			StringBuilder jsonBuilder = new StringBuilder();
-			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-			String line;
-			while ((line = bufferedReader.readLine()) != null) {
-				jsonBuilder.append(line);
-			}
-			String resJson = jsonBuilder.toString();
+				StringBuilder jsonBuilder = new StringBuilder();
+				BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+				String line;
+				while ((line = bufferedReader.readLine()) != null) {
+					jsonBuilder.append(line);
+				}
+				String resJson = jsonBuilder.toString();
 
-			String returnValue = new JsonParser().parse(resJson).getAsJsonObject().get("data").getAsJsonObject().get("url").getAsString();
+				returnValue = "<" + new JsonParser().parse(resJson).getAsJsonObject().get("data").getAsJsonObject().get("url").getAsString() + ">";
 
-			if (returnValue.equals("")) {
-				e.getMessage().editMessage(EmbedUtil.createEmbed(color, "**Bad HTML status code.**\nStatus code: " + new JsonParser().parse(resJson).getAsJsonObject().get("status_code"))).queue();
-				return;
+				if (returnValue.equals("")) {
+					e.getMessage().editMessage(EmbedUtil.createEmbed(color, "**Bad HTML status code.**\nStatus code: " + new JsonParser().parse(resJson).getAsJsonObject().get("status_code"))).queue();
+					return;
+				}
 			}
 			e.getMessage().editMessage(EmbedUtil.createEmbed(color,
 					"**Name: **" + mentionedUser.getName() + "#" + mentionedUser.getDiscriminator() + "\n" +

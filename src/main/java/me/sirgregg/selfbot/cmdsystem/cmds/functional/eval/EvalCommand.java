@@ -39,6 +39,8 @@ public class EvalCommand extends Command {
 			scriptEngine.put("channel", e.getChannel());
 			scriptEngine.put("args", args);
 			scriptEngine.put("jda", e.getJDA());
+			scriptEngine.put("guild", e.getGuild());
+			scriptEngine.put("author", e.getAuthor());
 
 			Object output = scriptEngine.eval(script);
 			e.getMessage().editMessage(EmbedUtil.createEmbed(color, "**Execution Successful**\n" + (output == null ? "Nothing returned." : output.toString()))).queue();

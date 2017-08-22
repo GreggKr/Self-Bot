@@ -13,7 +13,7 @@ import java.awt.*;
 
 public class QuoteCommand extends Command {
 	public QuoteCommand() {
-		super("quote", "quote [channel ID] <message ID>", "Displays a quote of the message.");
+		super(new String[] { "q", "quote" }, "quote [channel ID] <message ID>", "Displays a quote of the message.");
 	}
 
 	@Override

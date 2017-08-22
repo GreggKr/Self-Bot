@@ -12,12 +12,13 @@ import net.dv8tion.jda.core.exceptions.RateLimitedException;
 import javax.security.auth.login.LoginException;
 
 public class SelfBot {
+	private static long startStartupTime;
 	private static JDA jda;
 	private static ConfigurationHandler handler;
-	private static long lastStartupTime;
+	private static long endStartupTime;
 
 	public static void main(String[] args) {
-		long startTime = System.currentTimeMillis();
+		startStartupTime = System.currentTimeMillis();
 		handler = new ConfigurationHandler();
 		handler.setupJson(); // Creates configuration file
 		handler.parseJson(); // Gets the values from the configuration file
@@ -39,7 +40,7 @@ public class SelfBot {
 		} catch (LoginException | RateLimitedException | IllegalArgumentException | InterruptedException e) {
 			Logger.fatal("Caught an exception. Please check your discordToken in config.json. Exception: " + e);
 		}
-		lastStartupTime = System.currentTimeMillis() - startTime;
+		endStartupTime = System.currentTimeMillis() - startStartupTime;
 	}
 
 	// Registers all command listeners using the established JDA connection.
@@ -52,9 +53,18 @@ public class SelfBot {
 		return handler.getConfiguration();
 	}
 
+	public static String getUpTime() {
+		long millis = System.currentTimeMillis() - endStartupTime;
+
+		long minutes = (millis / 1000) / 60;
+		long seconds = (millis / 1000) % 60;
+
+		return minutes + "m " + seconds + "s";
+	}
+
 	public static String getLastStartupTime() {
-		long minutes = (lastStartupTime / 1000) / 60;
-		long seconds = (lastStartupTime / 1000) % 60;
+		long minutes = (endStartupTime / 1000) / 60;
+		long seconds = (endStartupTime / 1000) % 60;
 		return minutes + "m " + seconds + "s";
 	}
 

@@ -44,6 +44,7 @@ public class CommandHandler extends ListenerAdapter {
 		addCommand(new UserInfoCommand());
 		addCommand(new UrbanDictionaryCommand());
 		addCommand(new EvalFileCommand());
+		addCommand(new CleanUpSwiftsMessCommand());
 	}
 
 	// Returns a list of commands that you can't change.

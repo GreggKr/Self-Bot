@@ -64,7 +64,7 @@ public class UserInfoCommand extends Command {
 				}
 				String resJson = jsonBuilder.toString();
 
-				returnValue = "<" + new JsonParser().parse(resJson).getAsJsonObject().get("data").getAsJsonObject().get("url").getAsString() + ">";
+				returnValue = new JsonParser().parse(resJson).getAsJsonObject().get("data").getAsJsonObject().get("url").getAsString();
 
 				if (returnValue.equals("")) {
 					e.getMessage().editMessage(EmbedUtil.createEmbed(color, "**Bad HTML status code.**\nStatus code: " + new JsonParser().parse(resJson).getAsJsonObject().get("status_code"))).queue();

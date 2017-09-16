@@ -28,6 +28,14 @@ public class EvalFileCommand extends Command {
 		try {
 			FileReader reader = new FileReader(configuration.getScriptFilePath());
 
+			scriptEngine.put("e", e);
+			scriptEngine.put("message", e.getMessage());
+			scriptEngine.put("channel", e.getChannel());
+			scriptEngine.put("args", args);
+			scriptEngine.put("jda", e.getJDA());
+			scriptEngine.put("guild", e.getGuild());
+			scriptEngine.put("author", e.getAuthor());
+
 			Object output = scriptEngine.eval(reader);
 
 			reader.close();
